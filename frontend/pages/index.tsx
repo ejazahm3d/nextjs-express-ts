@@ -15,8 +15,9 @@ interface HomeProps {
 export default function Home(props: HomeProps) {
   const [courses, setCourses] = useState<Course[]>(props.courses);
 
-  async function handleCourseAdd(data: CourseFormValues) {
+  async function handleCourseAdd(data: CourseFormValues, reset: () => void) {
     await agent.Courses.create(data);
+    reset();
     const courses = await agent.Courses.list();
     setCourses(courses);
   }

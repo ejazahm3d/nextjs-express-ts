@@ -8,17 +8,17 @@ export interface CourseFormValues {
 }
 
 interface CourseFormProps {
-  onSubmit: (data: CourseFormValues) => void;
+  onSubmit: (data: CourseFormValues, reset: () => void) => void;
 }
 
-export function CourseForm(props: CourseFormProps) {
+export function CourseForm({ onSubmit }: CourseFormProps) {
   const { handleSubmit, register, reset } = useForm<CourseFormValues>();
 
   return (
     <section>
       <div className="container mx-auto items-center px-5 py-12 lg:px-20">
         <form
-          onSubmit={handleSubmit(props.onSubmit)}
+          onSubmit={handleSubmit((data) => onSubmit(data, reset))}
           className="flex flex-col w-full p-10 px-8 pt-6 mx-auto my-6 mb-4 transition duration-500 ease-in-out transform bg-white border rounded-lg lg:w-1/2"
         >
           <div className="flex flex-wrap mb-6 -mx-3">

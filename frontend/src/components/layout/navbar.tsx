@@ -1,16 +1,20 @@
+import Link from "next/link";
+
 export function Navbar() {
   return (
     <div className="container mx-auto items-center">
       <div className="items-center justify-between w-full px-5 overflow-y-auto tflex whitespace-nowrap scroll-hidden ">
         <div className="flex flex-col flex-wrap mx-auto md:items-center md:flex-row">
-          <a href="/" className="pr-2 lg:pr-8 lg:px-6 focus:outline-none">
-            <div className="inline-flex items-center">
-              <div className="w-4 h-4 p-4 mr-2 rounded-full bg-gradient-to-tr from-blue-500 to-blue-600"></div>
-              <h2 className="block p-2 text-xl font-medium tracking-tighter text-black transition duration-500 ease-in-out transform cursor-pointer hover:text-gray-500 lg:text-x lg:mr-8">
-                Courses
-              </h2>
-            </div>
-          </a>
+          <Link href="/">
+            <a className="pr-2 lg:pr-8 lg:px-6 focus:outline-none">
+              <div className="inline-flex items-center">
+                <div className="w-4 h-4 p-4 mr-2 rounded-full bg-gradient-to-tr from-blue-500 to-blue-600"></div>
+                <h2 className="block p-2 text-xl font-medium tracking-tighter text-black transition duration-500 ease-in-out transform cursor-pointer hover:text-gray-500 lg:text-x lg:mr-8">
+                  Courses
+                </h2>
+              </div>
+            </a>
+          </Link>
           <nav className="flex flex-wrap items-center justify-start text-base ">
             <NavItem name="Courses" />
             <NavItem name="About" />

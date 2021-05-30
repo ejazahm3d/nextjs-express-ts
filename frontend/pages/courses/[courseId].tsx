@@ -11,8 +11,25 @@ interface CoursePageProps {
   course: Course;
 }
 
-export default function CoursePage(props: CoursePageProps) {
-  return <div>{props.course.title}</div>;
+export default function CoursePage({ course }: CoursePageProps) {
+  return (
+    <>
+      <section className="text-gray-700 mx-auto">
+        <div className="container flex flex-col items-center px-5 py-8 mx-auto">
+          <div className="flex flex-col w-full mb-12 text-left ">
+            <div className="w-full mx-auto lg:w-1/2">
+              <h2 className="mx-auto mb-6 text-xl font-semibold leading-none tracking-tighter text-black title-font">
+                {course.title}
+              </h2>
+              <p className="mx-auto mb-4 text-base font-medium leading-relaxed text-gray-700 ">
+                {course.description}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
 }
 
 export const getServerSideProps: GetServerSideProps<CoursePageProps> = async (
