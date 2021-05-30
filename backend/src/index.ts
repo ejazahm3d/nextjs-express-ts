@@ -9,7 +9,7 @@ const port = 5000;
 
 // middlewares
 app.use(express.json());
-// app.use(cors());
+app.use(cors());
 
 // Get all courses
 app.get("/api/courses", (req, res) => {
@@ -26,7 +26,7 @@ app.get("/api/courses/:courseId", (req, res) => {
 
 // Create a course
 app.post("/api/courses", (req, res) => {
-  const body = req.body as CourseDto;
+  const body: CourseDto = req.body;
 
   if (!body.title || !body.description) {
     return res.status(400).send();

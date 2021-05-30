@@ -1,28 +1,46 @@
 import { Course } from "../types";
-import axios from "axios";
+import agent from "../src/api/agent";
 import { GetServerSideProps } from "next";
+import { CourseList } from "../src/components/course-list/course-list";
+import {
+  CourseForm,
+  CourseFormValues,
+} from "../src/components/course-form/course-form";
+import { useEffect, useState } from "react";
 
 interface HomeProps {
   courses: Course[];
 }
 
 export default function Home(props: HomeProps) {
+  const [courses, setCourses] = useState<Course[]>(props.courses);
+
+  async function handleCourseAdd(data: CourseFormValues) {
+    await agent.Courses.create(data);
+    const courses = await agent.Courses.list();
+    setCourses(courses);
+  }
+
+  async function handleCourseDelete(id: number) {
+    await agent.Courses.delete(id);
+    const courses = await agent.Courses.list();
+    setCourses(courses);
+  }
+
   return (
     <div>
-      {props.courses.map((item) => {
-        return <div key={item.id}>{item.title}</div>;
-      })}
+      <CourseForm onSubmit={handleCourseAdd} />
+      <CourseList courses={courses} onCourseDelete={handleCourseDelete} />
     </div>
   );
 }
 
 export const getServerSideProps: GetServerSideProps<HomeProps> = async () => {
-  const url = "http://localhost:5000/api/courses";
-  const res = await axios.get<Course[]>(url);
+  const courses = await agent.Courses.list();
 
   return {
     props: {
-      courses: res.data,
+      courses: courses,
     },
   };
 };
